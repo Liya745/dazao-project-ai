@@ -1,0 +1,78 @@
+{
+  "date": "2026-10-14",
+  "workspace": "E:\\JavaWeb-java-items\\dazao-project-ai",
+  "groups": [
+    {
+      "path": "E:\\JavaWeb-java-items\\dazao-project-ai\\src",
+      "files": 15,
+      "bytes": 56569.0,
+      "MiB": 0.05
+    },
+    {
+      "path": "E:\\JavaWeb-java-items\\dazao-project-ai\\frontend\\src",
+      "files": 4,
+      "bytes": 48565.0,
+      "MiB": 0.05
+    },
+    {
+      "path": "E:\\JavaWeb-java-items\\dazao-project-ai\\frontend\\node_modules",
+      "files": 770,
+      "bytes": 52151363.0,
+      "MiB": 49.74
+    },
+    {
+      "path": "E:\\JavaWeb-java-items\\dazao-project-ai\\frontend\\dist",
+      "files": 4,
+      "bytes": 111196.0,
+      "MiB": 0.11
+    },
+    {
+      "path": "E:\\JavaWeb-java-items\\dazao-project-ai\\gpt",
+      "files": 10,
+      "bytes": 563210.0,
+      "MiB": 0.54
+    },
+    {
+      "path": "E:\\JavaWeb-java-items\\dazao-project-ai\\target",
+      "files": 40,
+      "bytes": 34501898.0,
+      "MiB": 32.9
+    },
+    {
+      "path": "E:\\JavaWeb-java-items\\dazao-project-ai\\.git",
+      "files": 18,
+      "bytes": 26309.0,
+      "MiB": 0.03
+    }
+  ],
+  "jar": {
+    "path": "E:\\JavaWeb-java-items\\dazao-project-ai\\target\\dazao-character-0.1.0-SNAPSHOT.jar",
+    "bytes": 34142093
+  },
+  "backup": {
+    "path": "E:\\JavaWeb-java-items\\dazao-project-ai-backup-20261014-150653",
+    "files": 17042,
+    "bytes": 3100234609.0,
+    "MiB": 2956.61
+  },
+  "mavenCache": {
+    "path": "E:\\JavaDevelopTools\\maven-repo",
+    "beforeBytes": 5015374880,
+    "afterBytes": 5043227644.0,
+    "netAddedBytes": 27852764.0
+  },
+  "npmCache": {
+    "path": "C:\\Users\\Sion\\AppData\\Local\\npm-cache",
+    "totalBytes": 2049089898,
+    "operationIncrement": "unknown: no before baseline"
+  },
+  "downloaded": "35 npm dependency packages and required Maven dependencies; no repository clones, no browser downloads, no global installs",
+  "outputsGenerated": false,
+  "tempDeleted": {
+    "path": "E:\\JavaWeb-java-items\\dazao-project-ai\\.runtime",
+    "bytes": 55009,
+    "exists": false
+  },
+  "testServerStopped": true,
+  "note": "Snapshot before saving this resource report; npm cache total is shared, not attributed to this operation."
+}

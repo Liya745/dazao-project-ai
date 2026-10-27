@@ -1,0 +1,13 @@
+/target/
+/data/
+/frontend/node_modules/
+/frontend/dist/
+/deploy/artifacts/
+/.runtime/
+/.env
+/.env.*
+!/.env.example
+*.log
+.idea/
+.vscode/
+.DS_Store

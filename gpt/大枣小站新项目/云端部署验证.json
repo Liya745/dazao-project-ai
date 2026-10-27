@@ -1,0 +1,173 @@
+{
+  "date": "2026-10-14",
+  "host": "111.230.151.168",
+  "url": "http://dazao.xyz/dzproject/",
+  "directory": "/usr/dazao-character",
+  "protectedServicesUnchanged": true,
+  "protectedContainers": [
+    {
+      "name": "/dazao-prod-dazao-server-1",
+      "id": "a5d8ce97198a415c5da1de835e5e68a5bc134ffaf53f82b170baca10e9f19000",
+      "image": "sha256:fac1820badb095e10d0e7577aa4cc5a3c1c01c2821a4939eb20d61ad73c52903",
+      "started": "2026-10-11T15:12:31.984878786Z",
+      "restarts": 0,
+      "running": true,
+      "oom": false,
+      "configHash": "45f1be8ad821ef059b7f6acf6b2a99dfbbf4285b9a9d40dc9ecfd8dcf814607c"
+    },
+    {
+      "name": "/dazao-prod-mysql-1",
+      "id": "05d53385652fb7f9a1c941859faffabaf8a61809201662d8bec37ab9e99d8404",
+      "image": "sha256:043faea8be4e18f67c43de635f04f085549ffdb7c32156675faef178234a3309",
+      "started": "2026-10-11T15:11:59.666363915Z",
+      "restarts": 0,
+      "running": true,
+      "oom": false,
+      "configHash": "3cbafdd93ee8aa63953af78438637654798bac8e5f805a08cc318d993d4a6ee6"
+    },
+    {
+      "name": "/dazao-prod-nginx-1",
+      "id": "b1e61f476b1aeca59929992536d1a95a08b7eb135c62260b7a44c7a80a0a8526",
+      "image": "sha256:32ff71e48e7581511661dd87cdff551a7f54e7d1367b31791066a0533886c49b",
+      "started": "2026-10-11T15:13:34.748345065Z",
+      "restarts": 0,
+      "running": true,
+      "oom": false,
+      "configHash": "fb16f472ad87e212381b9edfceda45be93a0c564362f40511ecd43488c255e71"
+    },
+    {
+      "name": "/dazao-prod-redis-1",
+      "id": "cad403099e500edaa593e4a7f6bc6ca60351891ccf15bd65be3631969f140acc",
+      "image": "sha256:d79212716b024c881abe4be7ed71e8ffef14d13d1ba23100abef29ef309d1966",
+      "started": "2026-10-11T15:11:59.663740375Z",
+      "restarts": 0,
+      "running": true,
+      "oom": false,
+      "configHash": "58dab173ac70e471d73d6f6dda0c83227ca366470bd5dca358cbbad36761c045"
+    },
+    {
+      "name": "/saya-mysql",
+      "id": "a3c924a4763b0ae89706d207ecd382f0ad993ed1909a4c6c55b88ad4913a816a",
+      "image": "sha256:5ed8eaf61d639b00aa57dcabd8a532fd0110ba471f5b3a45bb4c2243db0fba3e",
+      "started": "2026-10-03T02:39:47.85448553Z",
+      "restarts": 0,
+      "running": true,
+      "oom": false,
+      "configHash": "edb3f036eb1b16201082142960ecc7b960cb098d930705ee973eab72f3200572"
+    },
+    {
+      "name": "/saya-nacos",
+      "id": "b31ff0efea24b5e7faaf58b682ac16781e6b70667c31d6ff0f536795d1410995",
+      "image": "sha256:dcf48636030269a5d271a5d0fe7ab12b1b54623154e1d7aa951bc7084af0e544",
+      "started": "2026-10-03T02:39:47.862039792Z",
+      "restarts": 0,
+      "running": true,
+      "oom": false,
+      "configHash": "d06a37ed57bf0e2ec5b1bba86f92521f773cc0c96c7480c4502a442b43750a32"
+    },
+    {
+      "name": "/saya-postgresql",
+      "id": "585e567621d9ebe0d68c29836c7925ff295069d4ff5579fd0d89fda895aaf407",
+      "image": "sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea",
+      "started": "2026-10-03T09:51:19.448698166Z",
+      "restarts": 0,
+      "running": true,
+      "oom": false,
+      "configHash": "71dc8d75133a3f80bdf6d45901477b049d7a6ede575da966d5f68df1f0f046cf"
+    },
+    {
+      "name": "/saya-redis",
+      "id": "ab94bf73a07e6b0aece4ebda6b65e6dd2631e7d1305edfc701e2aa6977b9e676",
+      "image": "sha256:e29f7507440bb3ca9c3a9f0abdfa79347e2787ba96f82b98574bc3e479ccd6ca",
+      "started": "2026-10-03T02:39:47.857186488Z",
+      "restarts": 0,
+      "running": true,
+      "oom": false,
+      "configHash": "793f9f6b09417c086bc7009fe98d56ac3fb81e3ca204184084ecc02b9625802b"
+    }
+  ],
+  "protectedConfigCount": 5,
+  "sayaHealth": {
+    "sayaMysql": {
+      "code": 0,
+      "stdout": "1",
+      "stderr": ""
+    },
+    "sayaRedis": {
+      "code": 0,
+      "stdout": "PONG",
+      "stderr": ""
+    },
+    "sayaPostgres": {
+      "code": 0,
+      "stdout": "/var/run/postgresql:5432 - accepting connections",
+      "stderr": ""
+    },
+    "sayaNacos": {
+      "code": 200
+    }
+  },
+  "modelVerification": {
+    "usernameForCleanup": "deploy_check_5e3b203f09ad",
+    "checks": {
+      "assetsUnderPrefix": 3,
+      "registerLoginCsrfCookie": true,
+      "realCharacterGeneration": true,
+      "characterFields": [
+        "name",
+        "description",
+        "personality",
+        "scenario",
+        "firstMessage",
+        "messageExample",
+        "appearance",
+        "speechStyle",
+        "sourceType",
+        "work",
+        "canonVersion"
+      ],
+      "realSseAndPersistence": true,
+      "testCharacterAndConversationDeleted": true
+    },
+    "realProviderTested": true
+  },
+  "schemaCheck": "table_name\ncharacters\nchat_turns\nconversations\nstudio_users\n(4 rows, 393 ms)\n(Update count: 1, 4 ms)\nremaining_users\n0\n(1 row, 1 ms)\n",
+  "testAccountCleanup": "(Update count: 1, 198 ms)\nremaining_test_users\n0\n(1 row, 191 ms)\n",
+  "app": {
+    "id": "3a7febd74fb8c4a35f252ba8b48adf2e645baa7aab4ca4d6b8a1e7d36708dbfa",
+    "health": "healthy",
+    "restarts": 0,
+    "oom": false,
+    "memoryLimit": 402653184,
+    "cpuQuota": 500000000,
+    "ports": {
+      "8099/tcp": [
+        {
+          "HostIp": "127.0.0.1",
+          "HostPort": "18199"
+        }
+      ]
+    }
+  },
+  "resourceBytes": {
+    "total": 65313743,
+    "application": 34142211,
+    "data": 40960,
+    "backups": 31099638
+  },
+  "memory": {
+    "code": 0,
+    "stdout": "total        used        free      shared  buff/cache   available\nMem:            3718        2212         210          11        1596        1506\nSwap:           2047         728        1319",
+    "stderr": ""
+  },
+  "runtimeStats": "153.9MiB / 384MiB 0.13%",
+  "artifact": {
+    "jarSha256": "16dda095ac1efd7bfc7447187769ede4c4a4759793bb37709579372b5e592a3a",
+    "jarBytes": 34142211,
+    "imageAlias": "dazao-migration/java:20261011",
+    "imageId": "sha256:fac1820badb095e10d0e7577aa4cc5a3c1c01c2821a4939eb20d61ad73c52903",
+    "contextPath": "/dzproject",
+    "date": "2026-10-14"
+  },
+  "retainedBundleBytes": 31082155
+}

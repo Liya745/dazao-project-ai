@@ -1,0 +1,60 @@
+name: dazao-character
+services:
+  studio:
+    image: ${JAVA_IMAGE:-dazao-migration/java:20261011}
+    pull_policy: never
+    restart: unless-stopped
+    init: true
+    user: "10001:10001"
+    working_dir: /app
+    entrypoint: ["java"]
+    command: ["-jar", "/app/application.jar"]
+    read_only: true
+    mem_limit: 384m
+    memswap_limit: 384m
+    cpus: 0.5
+    oom_score_adj: 500
+    pids_limit: 128
+    stop_grace_period: 30s
+    environment:
+      TZ: Asia/Shanghai
+      JAVA_TOOL_OPTIONS: "-Xms32m -Xmx192m -XX:MaxMetaspaceSize=96m -XX:MaxDirectMemorySize=24m -XX:ActiveProcessorCount=1 -XX:+ExitOnOutOfMemoryError -Dfile.encoding=UTF-8"
+      SERVER_ADDRESS: 0.0.0.0
+      SERVER_PORT: "8099"
+      SERVER_SERVLET_CONTEXT_PATH: /dzproject
+      SERVER_SERVLET_SESSION_COOKIE_NAME: DZSTUDIOSESSION
+      SERVER_SERVLET_SESSION_COOKIE_PATH: /dzproject
+      AI_API_KEY: ${AI_API_KEY:-}
+      AI_BASE_URL: ${AI_BASE_URL:-https://api.deepseek.com/v1}
+      AI_MODEL: ${AI_MODEL:-deepseek-chat}
+    ports:
+      - "127.0.0.1:18199:8099"
+    volumes:
+      - type: bind
+        source: ./app/application.jar
+        target: /app/application.jar
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ./data
+        target: /app/data
+        bind:
+          create_host_path: false
+    tmpfs:
+      - /tmp:size=32m,mode=1777
+    healthcheck:
+      test:
+        - CMD
+        - bash
+        - -ec
+        - "exec 3<>/dev/tcp/127.0.0.1/8099; printf 'GET /dzproject/api/status HTTP/1.1\r\nHost: localhost\r\nConnection: close\r\n\r\n' >&3; read -r status <&3; [[ \"$$status\" == *' 200 '* ]]"
+      interval: 15s
+      timeout: 5s
+      retries: 12
+      start_period: 45s
+    logging:
+      driver: json-file
+      options:
+        max-size: 5m
+        max-file: "3"

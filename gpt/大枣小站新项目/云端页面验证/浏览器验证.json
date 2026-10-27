@@ -1,0 +1,22 @@
+[
+  {
+    "host": "111.230.151.168",
+    "http": 200,
+    "pageTitle": "大枣 · 角色工作室",
+    "pageErrors": [],
+    "failedResponses": [],
+    "allRequestsUnderPrefix": true,
+    "desktopAndMobile": "passed",
+    "realModelCalled": false
+  },
+  {
+    "host": "dazao.xyz",
+    "http": 200,
+    "pageTitle": "大枣 · 角色工作室",
+    "pageErrors": [],
+    "failedResponses": [],
+    "allRequestsUnderPrefix": true,
+    "desktopAndMobile": "passed",
+    "realModelCalled": false
+  }
+]

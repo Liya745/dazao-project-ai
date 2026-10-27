@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-14",
+  "workspace": "E:\\JavaWeb-java-items\\dazao-project-ai",
+  "installedNewDependencies": false,
+  "clonedRepositories": [],
+  "downloadedDockerImages": [],
+  "existingFrontendDependencies": {
+    "path": "E:\\JavaWeb-java-items\\dazao-project-ai\\frontend\\node_modules",
+    "files": 774,
+    "bytes": 53147872.0
+  },
+  "deploymentSourcesBytes": 28356.0,
+  "artifacts": {
+    "path": "E:\\JavaWeb-java-items\\dazao-project-ai\\deploy\\artifacts",
+    "files": 7,
+    "bytes": 65335918.0
+  },
+  "deployBuild": {
+    "path": "E:\\JavaWeb-java-items\\dazao-project-ai\\target\\deployment",
+    "files": 40,
+    "bytes": 34502262.0
+  },
+  "localFrontendBuild": {
+    "path": "E:\\JavaWeb-java-items\\dazao-project-ai\\frontend\\dist",
+    "files": 4,
+    "bytes": 111206.0
+  },
+  "screenshotAndBrowserReports": {
+    "path": "E:\\JavaWeb-java-items\\dazao-project-ai\\gpt\\大枣小站新项目\\云端页面验证",
+    "files": 5,
+    "bytes": 534904.0
+  },
+  "privateEnv": {
+    "path": "E:\\JavaWeb-java-items\\dazao-project-ai\\.env",
+    "bytes": 113,
+    "gitIgnored": true,
+    "valuePrinted": false
+  },
+  "cloudResources": {
+    "total": 65313743,
+    "application": 34142211,
+    "data": 40960,
+    "backups": 31099638
+  },
+  "cloudMemory": "153.9MiB / 384MiB 0.13%",
+  "cloudDatabase": "/usr/dazao-character/data/studio.mv.db",
+  "cloudModelVerified": true,
+  "sayaUnchanged": true,
+  "tempCleanup": {
+    "directory": "E:\\JavaWeb-java-items\\dazao-project-ai\\.runtime",
+    "removedBytes": 5075,
+    "exists": false,
+    "browserStopped": true,
+    "localTransferStopped": true,
+    "sshTransfersClosed": true,
+    "remoteH2ToolAndSqlRemoved": true,
+    "remoteTemporaryAccountsRemoved": true
+  },
+  "outputsGenerated": false,
+  "note": "Sizes are a snapshot before saving this report. Root target contains both local and deployment build variants. Existing caches are reused and not counted as new downloads."
+}
