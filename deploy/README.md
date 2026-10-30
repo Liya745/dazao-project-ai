@@ -20,7 +20,7 @@
 ./deploy/prepare.ps1
 ```
 
-复用已有前端依赖和 Maven 缓存，运行测试后输出部署 Jar 到 `target/deployment/`，复制到 `deploy/artifacts/app/application.jar`。部署页面输出到 `deploy/artifacts/web/`。根目录本地构建仍使用 `/` 和 `target/`。
+复用已有前端依赖和 Maven 缓存，运行测试后输出部署 Jar 到 `dazao-admin/target/deployment/`，复制到 `deploy/artifacts/app/application.jar`。部署页面输出到 `deploy/artifacts/web/`。根目录本地构建仍使用 `/` 和 `dazao-admin/target/`。
 
 上传应用 Jar、Compose、脚本和 Nginx 片段，不上传 `node_modules`、本地数据库或旧项目备份。凭据通过私有传输进入服务器 `.env`，不可写进 Jar。实际第一次部署的产物清单在 `deploy/artifacts/artifact.json`，运行资料和检查记录保存在服务器 `backups/`。
 
@@ -71,4 +71,4 @@ python3 scripts/ingress.py rollback
 
 ## 清理
 
-本地 `deploy/artifacts/` 和 `target/deployment/` 都是可重新构建的产物，已忽略提交。服务器 `backups/deploy.bundle.tar.gz` 是保留的部署输入包，需要省空间时可在确认应用与回退资料完整后删除。服务器 `.env`、`data/` 和 `backups/ingress/` 需保留。
+本地 `deploy/artifacts/` 和 `dazao-admin/target/deployment/` 都是可重新构建的产物，已忽略提交。服务器 `backups/deploy.bundle.tar.gz` 是保留的部署输入包，需要省空间时可在确认应用与回退资料完整后删除。服务器 `.env`、`data/` 和 `backups/ingress/` 需保留。

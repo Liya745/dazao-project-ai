@@ -10,7 +10,7 @@ if (Test-Path -LiteralPath $privateEnv) {
         }
     }
 }
-$jar = Join-Path $PSScriptRoot 'target\dazao-character-0.1.0-SNAPSHOT.jar'
+$jar = Join-Path $PSScriptRoot 'dazao-admin\target\dazao-character-0.1.0-SNAPSHOT.jar'
 if (-not (Test-Path -LiteralPath $jar)) {
     throw '请先在项目根目录运行 ./build.ps1'
 }

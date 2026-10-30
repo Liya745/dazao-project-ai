@@ -24,7 +24,26 @@
 
 数据库是独立 H2 文件 `/usr/dazao-character/data/studio.mv.db`，不使用 Saya 的 MySQL。首次启动自动执行 `schema.sql`，创建 `studio_users`、`characters`、`conversations`、`chat_turns` 四张表。服务器 `.env` 保存模型配置，权限 600，不提交 Git。
 
-部署文件在 `deploy/`，操作说明见 `deploy/README.md`。`deploy/prepare.ps1` 生成前缀为 `/dzproject/` 的独立部署构建，输出到 `deploy/artifacts/` 和 `target/deployment/`；本地 `/` 构建不受影响。实际上线及资源记录见 `gpt/大枣小站新项目/腾讯云部署-2026-10-14.md`。
+部署文件在 `deploy/`，操作说明见 `deploy/README.md`。`deploy/prepare.ps1` 生成前缀为 `/dzproject/` 的独立部署构建，输出到 `deploy/artifacts/` 和 `dazao-admin/target/deployment/`；本地 `/` 构建不受影响。实际上线及资源记录见 `gpt/大枣小站新项目/腾讯云部署-2026-10-14.md`。
+
+## Maven 模块结构
+
+参考 [若依的父 POM 与模块划分](https://github.com/yangzongzhuan/RuoYi/blob/master/pom.xml)，只采用分层组织方式，保留现有 Spring Security、JDBC/H2、LangChain4j 与 Vue 技术栈。根 `pom.xml` 为 `dazao-parent` 聚合与版本管理；只有 `dazao-admin` 生成 Spring Boot 可运行 Jar，其余模块为普通库。
+
+| 模块 | 职责 | 项目内依赖 |
+| --- | --- | --- |
+| `dazao-common` | 可公开的业务错误 `ApiException` | 无 |
+| `dazao-system` | 注册、认证用户查询、登录用户名解析为账号 ID | common |
+| `dazao-framework` | 会话认证、CSRF、密码编码和安全配置 | system |
+| `dazao-ai` | 模型适配与共享请求额度 | common |
+| `dazao-character` | 角色定义、角色/会话持久化、字段生成合并与聊天编排 | common、ai |
+| `dazao-admin` | 启动类、HTTP/SSE 接口、配置、建表及集成测试 | framework、system、character、ai、common |
+
+业务层不依赖 admin。`UserService` 隔离账号逻辑，`ConversationService` 负责快照上下文、并发限制和轮次状态；Controller 将回调转换为原有 `delta/done/error` SSE 事件。角色与会话同属一个业务模块，保留共享仓库与事务，不额外引入 Mapper 框架或空模块。
+
+运行数据继续位于项目根目录 `data/`，API、Cookie/CSRF、数据表与角色卡格式不变，无需数据库迁移。启动类全名不变，Java 包统一位于 `com.dazao.character` 下以维持组件扫描。导入 IDE 时选择根 POM。
+
+在根目录执行 `mvn test` 或 `mvn clean package` 会按依赖顺序构建整个 reactor；指定业务子模块时带 `-am`，例如 `mvn -pl dazao-character -am test`。前端仍需先执行 `npm ci` 和 `npm run build`，或使用 `./build.ps1`。不要直接在聚合根执行 `spring-boot:run`；开发启动命令见下文。集成测试报告在 `dazao-admin/target/surefire-reports/`。
 
 ## 本地启动
 
@@ -55,7 +74,8 @@ $env:AI_MODEL = 'deepseek-chat'
 
 ```powershell
 # 终端一，项目根目录
-mvn spring-boot:run
+mvn -pl dazao-admin -am install -DskipTests
+mvn -pl dazao-admin spring-boot:run
 
 # 终端二
 cd frontend
@@ -67,7 +87,7 @@ npm run dev
 
 ## 配置与数据
 
-后端配置在 `src/main/resources/application.yml`。默认只监听 `127.0.0.1:8099`。H2 写入根目录 `data/studio.mv.db`，退出账号不会删除数据；数据库与构建产物均忽略提交。
+后端配置在 `dazao-admin/src/main/resources/application.yml`。默认只监听 `127.0.0.1:8099`。H2 写入根目录 `data/studio.mv.db`，退出账号不会删除数据；数据库与构建产物均忽略提交。
 
 使用流程：注册 → 描述需求 → 生成草稿 → 调整/锁定/局部重生成 → 保存 → 开始试聊。也可手工填写标有星号的必填字段后保存，不必调用生成器。锁定只约束重生成，用户仍可手动编辑该字段。
 
@@ -99,11 +119,11 @@ npm run dev
 
 `E:/JavaWeb-java-items/dazao-project-ai-backup-20261014-150653/`
 
-恢复记录在 `gpt/大枣小站新项目/目录替换记录.json`。本地替换后另行完成本次腾讯云部署，旧云端大枣服务保留用于入口回退。新项目已初始化独立本地 Git 仓库，分支 `codex/character-studio`，与旧 Git 历史分离；未创建提交，没有远程仓库地址，未推送 Git。
+恢复记录在 `gpt/大枣小站新项目/目录替换记录.json`。本地替换后另行完成本次腾讯云部署，旧云端大枣服务保留用于入口回退。项目远程仓库为 `Liya745/dazao-project-ai`，原业务分支为 `codex/character-studio`；模块重构在 `codex/maven-modules` 分支，与旧项目备份的 Git 历史分离。
 
 ## 可清理内容
 
-- `target/`：Jar、编译和测试报告，可删后重新构建。
+- 各模块 `target/`：Jar、编译和测试报告，可删后重新构建；可运行 Jar 位于 `dazao-admin/target/dazao-character-0.1.0-SNAPSHOT.jar`。
 - `frontend/dist/`：前端构建产物，可重新构建。
 - `frontend/node_modules/`：前端依赖，可重新执行 `npm ci`。
 - `data/`：实际业务数据，删除会丢失账号与角色，不作为临时目录清理。

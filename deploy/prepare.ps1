@@ -20,7 +20,7 @@ Push-Location $projectRoot
 try {
     & mvn.cmd -B -ntp -Pdeployment clean package
     if ($LASTEXITCODE -ne 0) { throw '部署 Jar 构建或测试失败' }
-    $application = Join-Path $projectRoot 'target\deployment\dazao-character-0.1.0-SNAPSHOT.jar'
+    $application = Join-Path $projectRoot 'dazao-admin\target\deployment\dazao-character-0.1.0-SNAPSHOT.jar'
     New-Item -ItemType Directory -Path (Join-Path $PSScriptRoot 'artifacts\app') -Force | Out-Null
     Copy-Item -LiteralPath $application -Destination (Join-Path $PSScriptRoot 'artifacts\app\application.jar')
 } finally {
