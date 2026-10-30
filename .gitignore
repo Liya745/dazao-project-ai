@@ -1,7 +1,7 @@
 **/target/
 /data/
-/frontend/node_modules/
-/frontend/dist/
+/dazao-ui/node_modules/
+/dazao-ui/dist/
 /deploy/artifacts/
 /.runtime/
 /.env

@@ -1,8 +1,18 @@
 // 统一同源会话、CSRF 与 SSE；模型凭据永远不传给浏览器。
 const API_BASE = import.meta.env.BASE_URL + 'api'
 
+async function request(url, options) {
+  try {
+    return await fetch(url, options)
+  } catch (error) {
+    if (error.name === 'TypeError') throw new Error('网络连接中断，请检查网络后重试，输入已保留')
+    if (error.name === 'TimeoutError') throw new Error('请求超时，输入已保留，请稍后重试')
+    throw error
+  }
+}
+
 async function csrf() {
-  const response = await fetch(API_BASE + '/auth/csrf', { credentials: 'same-origin' })
+  const response = await request(API_BASE + '/auth/csrf', { credentials: 'same-origin', signal: AbortSignal.timeout(20000) })
   if (!response.ok) throw new Error('无法校验请求，请稍后再试')
   return response.json()
 }
@@ -23,8 +33,8 @@ export async function api(path, { method = 'GET', body, form = false } = {}) {
     headers[token.headerName] = token.token
   }
   if (body !== undefined) headers['Content-Type'] = form ? 'application/x-www-form-urlencoded' : 'application/json'
-  const response = await checked(await fetch(API_BASE + path, {
-    method, headers, credentials: 'same-origin',
+  const response = await checked(await request(API_BASE + path, {
+    method, headers, credentials: 'same-origin', signal: AbortSignal.timeout(path.includes('/generate') ? 100000 : 20000),
     body: body === undefined ? undefined : form ? new URLSearchParams(body) : JSON.stringify(body)
   }))
   if (response.status === 204 || response.headers.get('content-length') === '0') return null
@@ -39,7 +49,7 @@ export async function streamMessage(conversationId, content, onEvent) {
   let reader
   let completed = false
   try {
-    const response = await checked(await fetch(API_BASE + '/conversations/' + conversationId + '/messages', {
+    const response = await checked(await request(API_BASE + '/conversations/' + conversationId + '/messages', {
       method: 'POST', credentials: 'same-origin', signal: controller.signal,
       headers: { 'Content-Type': 'application/json', Accept: 'text/event-stream, application/json', [token.headerName]: token.token },
       body: JSON.stringify({ content })

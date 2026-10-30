@@ -6,7 +6,7 @@ if ($web -ne (Join-Path $projectRoot 'deploy\artifacts\web')) {
 }
 
 # 部署构建与本地根路径构建分开，避免覆盖开发用页面及 Jar。
-Push-Location (Join-Path $projectRoot 'frontend')
+Push-Location (Join-Path $projectRoot 'dazao-ui')
 $previousBase = $env:VITE_BASE_PATH
 try {
     $env:VITE_BASE_PATH = '/dzproject/'

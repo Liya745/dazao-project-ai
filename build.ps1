@@ -3,7 +3,7 @@ $ErrorActionPreference = 'Stop'
 # 从脚本目录构建，避免在别的工作目录写入依赖和产物。
 Push-Location $PSScriptRoot
 try {
-    Push-Location (Join-Path $PSScriptRoot 'frontend')
+    Push-Location (Join-Path $PSScriptRoot 'dazao-ui')
     try {
         & npm.cmd ci --no-audit --no-fund
         if ($LASTEXITCODE -ne 0) { throw '前端依赖安装失败' }

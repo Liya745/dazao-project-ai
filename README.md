@@ -1,6 +1,6 @@
 # 大枣 · 角色工作室
 
-根据用户需求创建、编辑并试聊原创、IP 或功能型角色的独立项目。后端在仓库根目录，前端在 `frontend/`，方案在 `gpt/大枣小站新项目/`。
+根据用户需求创建、编辑并试聊原创、IP 或功能型角色的独立项目。后端在仓库根目录，前端在 `dazao-ui/`，方案在 `gpt/大枣小站新项目/`。
 
 ## 已实现的首版
 
@@ -25,6 +25,16 @@
 数据库是独立 H2 文件 `/usr/dazao-character/data/studio.mv.db`，不使用 Saya 的 MySQL。首次启动自动执行 `schema.sql`，创建 `studio_users`、`characters`、`conversations`、`chat_turns` 四张表。服务器 `.env` 保存模型配置，权限 600，不提交 Git。
 
 部署文件在 `deploy/`，操作说明见 `deploy/README.md`。`deploy/prepare.ps1` 生成前缀为 `/dzproject/` 的独立部署构建，输出到 `deploy/artifacts/` 和 `dazao-admin/target/deployment/`；本地 `/` 构建不受影响。实际上线及资源记录见 `gpt/大枣小站新项目/腾讯云部署-2026-10-14.md`。
+
+## 界面与前端目录
+
+前端目录现为 `dazao-ui/`，原 `frontend/` 已整体迁移。旧开发进程请停止后从新目录启动，IDE 重新加载根 Maven 工程。前端依赖与 Vue/Vite 版本不变，构建与启动仍可使用根目录 `build.ps1`、`run.ps1`；部署脚本已同步新路径。
+
+界面采用大枣自己的枣红品牌色与中性色分层，参考 [Fluent 布局](https://fluent2.microsoft.design/layout)、[Fluent 对话框](https://fluent2.microsoft.design/components/web/react/core/dialog/usage) 和 [Material 自适应布局](https://m3.material.io/foundations/layout/layout-overview)。工作室将核心设定与更多细节分组，保留实时预览和保存状态；手机使用底部导航，会话列表和聊天内容分开呈现。关闭/返回会保留当前草稿，清空、删除和退出需确认；表单错误、连接错误、生成和回复状态都有明确反馈。
+
+浏览器回归脚本在 `dazao-ui/tests/`，使用已有 Playwright/Chromium 工具，无新增运行依赖。请仅对使用临时内存 H2、模型 Key 为空的本机测试实例运行，脚本会注册临时账号；工具可通过 `PLAYWRIGHT_MODULE` 和 `CHROMIUM_PATH` 指定，`UI_QA_URL` 默认为 `http://127.0.0.1:5199`，也支持完整 `/dzproject/` 前缀。准备好工具与测试服务后执行 `npm run test:browser`。默认截图和结果写入根 `.runtime/ui-browser/`，可用 `UI_QA_OUTPUT` 指定输出目录。脚本禁止指向远程站点。
+
+`browser-smoke.cjs` 使用真实本机账号、角色和会话接口；`model-ui.cjs` 对生成、SSE 和轮次回读使用明确的浏览器网络夹具，不能据此判断真实模型供应商质量或连通性。当前截图及详细验证见 `gpt/大枣小站新项目/界面优化验证/`。
 
 ## Maven 模块结构
 
@@ -66,9 +76,9 @@ $env:AI_MODEL = 'deepseek-chat'
 ./run.ps1
 ```
 
-然后访问 **http://127.0.0.1:8099/**。`build.ps1` 在 `frontend/node_modules/` 安装锁文件中的依赖，并运行前端构建及 Maven 测试、打包。`run.ps1` 直接启动已构建 Jar，按 Ctrl+C 停止。
+然后访问 **http://127.0.0.1:8099/**。`build.ps1` 在 `dazao-ui/node_modules/` 安装锁文件中的依赖，并运行前端构建及 Maven 测试、打包。`run.ps1` 直接启动已构建 Jar，按 Ctrl+C 停止。
 
-不配置模型也能注册、编辑、保存、导出角色和浏览会话；生成及回复会明确提示模型待配置。页面“模型已配置”只代表有后端配置，不代表供应商连通性已验证。
+不配置模型也能注册、编辑、保存、导出角色和浏览会话；生成及回复会明确提示模型待配置。页面“AI 已配置”只代表有后端配置，不代表供应商连通性已验证。
 
 开发时也可运行两个终端：
 
@@ -78,7 +88,7 @@ mvn -pl dazao-admin -am install -DskipTests
 mvn -pl dazao-admin spring-boot:run
 
 # 终端二
-cd frontend
+cd dazao-ui
 npm ci
 npm run dev
 ```
@@ -119,13 +129,13 @@ npm run dev
 
 `E:/JavaWeb-java-items/dazao-project-ai-backup-20261014-150653/`
 
-恢复记录在 `gpt/大枣小站新项目/目录替换记录.json`。本地替换后另行完成本次腾讯云部署，旧云端大枣服务保留用于入口回退。项目远程仓库为 `Liya745/dazao-project-ai`，原业务分支为 `codex/character-studio`；模块重构在 `codex/maven-modules` 分支，与旧项目备份的 Git 历史分离。
+恢复记录在 `gpt/大枣小站新项目/目录替换记录.json`。本地替换后另行完成本次腾讯云部署，旧云端大枣服务保留用于入口回退。项目远程仓库为 `Liya745/dazao-project-ai`，原业务分支为 `codex/character-studio`；模块重构已进入 `master`（原重构工作分支为 `codex/maven-modules`），与旧项目备份的 Git 历史分离。
 
 ## 可清理内容
 
 - 各模块 `target/`：Jar、编译和测试报告，可删后重新构建；可运行 Jar 位于 `dazao-admin/target/dazao-character-0.1.0-SNAPSHOT.jar`。
-- `frontend/dist/`：前端构建产物，可重新构建。
-- `frontend/node_modules/`：前端依赖，可重新执行 `npm ci`。
+- `dazao-ui/dist/`：前端构建产物，可重新构建。
+- `dazao-ui/node_modules/`：前端依赖，可重新执行 `npm ci`。
 - `data/`：实际业务数据，删除会丢失账号与角色，不作为临时目录清理。
 - 同级旧项目备份含旧代码与数据，确认新项目及恢复不再需要后再自行决定保留或移走。
 

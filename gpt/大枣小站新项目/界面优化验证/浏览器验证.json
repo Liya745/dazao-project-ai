@@ -1,0 +1,19 @@
+{
+  "baseURL": "http://127.0.0.1:18092/dzproject/",
+  "backend": "real Spring Boot, isolated in-memory H2, AI key empty",
+  "checks": [
+    "dialog escape, close, focus restoration and keyboard containment",
+    "real register/login, post-login destination, duplicate-submit guard",
+    "required field validation, accessible inline error and focus",
+    "details tab retains inputs, discard cancel and browser Back preserve draft",
+    "save idempotency, generation error preservation, search and copy",
+    "card export and delete cancellation",
+    "duplicate conversation creation guard and missing-model message preservation",
+    "mobile conversation list/back preserves input and delete cancel",
+    "all main pages no horizontal overflow at 320,390,768,1024,1440",
+    "logout, incorrect login error and persisted assets after relogin",
+    "no browser page errors"
+  ],
+  "errors": [],
+  "realModelCalls": 0
+}

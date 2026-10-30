@@ -54,7 +54,7 @@
         </dependency>
     </dependencies>
     <properties>
-        <frontend.dist.directory>${project.basedir}/../frontend/dist</frontend.dist.directory>
+        <dazao-ui.dist.directory>${project.basedir}/../dazao-ui/dist</dazao-ui.dist.directory>
     </properties>
     <build>
         <finalName>dazao-character-${project.version}</finalName>
@@ -63,7 +63,7 @@
                 <directory>src/main/resources</directory>
             </resource>
             <resource>
-                <directory>${frontend.dist.directory}</directory>
+                <directory>${dazao-ui.dist.directory}</directory>
                 <targetPath>static</targetPath>
             </resource>
         </resources>
@@ -81,7 +81,7 @@
         <profile>
             <id>deployment</id>
             <properties>
-                <frontend.dist.directory>${project.basedir}/../deploy/artifacts/web</frontend.dist.directory>
+                <dazao-ui.dist.directory>${project.basedir}/../deploy/artifacts/web</dazao-ui.dist.directory>
             </properties>
             <build>
                 <directory>${project.basedir}/target/deployment</directory>

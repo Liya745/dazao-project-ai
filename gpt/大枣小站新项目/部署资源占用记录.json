@@ -5,7 +5,7 @@
   "clonedRepositories": [],
   "downloadedDockerImages": [],
   "existingFrontendDependencies": {
-    "path": "E:\\JavaWeb-java-items\\dazao-project-ai\\frontend\\node_modules",
+    "path": "E:\\JavaWeb-java-items\\dazao-project-ai\\dazao-ui\\node_modules",
     "files": 774,
     "bytes": 53147872.0
   },
@@ -21,7 +21,7 @@
     "bytes": 34502262.0
   },
   "localFrontendBuild": {
-    "path": "E:\\JavaWeb-java-items\\dazao-project-ai\\frontend\\dist",
+    "path": "E:\\JavaWeb-java-items\\dazao-project-ai\\dazao-ui\\dist",
     "files": 4,
     "bytes": 111206.0
   },

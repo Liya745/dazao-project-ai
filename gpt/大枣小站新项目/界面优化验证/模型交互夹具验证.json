@@ -1,0 +1,14 @@
+{
+  "baseURL": "http://127.0.0.1:18092/dzproject/",
+  "fixtures": "Browser network fixtures only for generation, SSE and turn readback. Registration, save, conversation creation/deletion use real local backend.",
+  "realModelCalls": 0,
+  "checks": [
+    "connection failure and explicit retry recovery",
+    "initial loading state",
+    "generation busy state, duplicate suppression, selected/locked payload and draft rendering",
+    "SSE success rendering, reply busy state, single submission and input clearing (fixture)",
+    "SSE partial/error rendering and retry input preservation (fixture)",
+    "confirmed deletion removes actual conversation exactly once"
+  ],
+  "errors": []
+}
